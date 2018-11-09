@@ -1,11 +1,21 @@
 server:
-  port: 8763
+  port: 8764
 
 spring:
   application:
     name: service-hi
+  cloud:
+    client:
+      ipAddress: 10.4.136.182
+
 
 eureka:
+  instance:
+    #  preferIpAddress  prefer-ip-address 驼峰法和-法命名都可以
+    #    preferIpAddress:  true
+    prefer-ip-address:  true
+    #id为客户端自己定义
+    instance-id:  ${spring.cloud.client.ipAddress}:${server.port}
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
